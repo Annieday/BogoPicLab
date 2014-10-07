@@ -7,6 +7,19 @@
 
     <!-- Preview: listitem=@android:layout/simple_list_item_1 -->
 
+    <TextView
+        android:id="@+id/randomString"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.23"
+        android:text="" />
+
+    <Button
+        android:id="@+id/randomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Generate Random Message" />
+
     <ImageButton
         android:id="@+id/TakeAPhoto"
         android:layout_width="fill_parent"
