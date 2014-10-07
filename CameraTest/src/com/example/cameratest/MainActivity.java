@@ -18,6 +18,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	Uri imageFileUri;
+	Uri stringFileUri;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,42 +66,44 @@ public class MainActivity extends Activity {
 		File imageFile = new File(imageFilePath);
 		imageFileUri = Uri.fromFile(imageFile);
 
+		// Create an URI for the random string file
+		String textFilePath = folder + "/"
+				+ String.valueOf(System.currentTimeMillis()) + ".txt";
 		// TODO: Put in the intent in the tag MediaStore.EXTRA_OUTPUT the URI
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		// TODO: Start the activity (expecting a result), with the code
 		// CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-		
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO: Handle the results from CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE
-		
+
 		// TODO: Handle the cases for RESULT_OK, RESULT_CANCELLED, and others
-		
+
 		// When the result is OK, set text "Photo OK!" in the status
-		//		and set the image in the Button with:
-		//		button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
+		// and set the image in the Button with:
+		// button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
 		// When the result is CANCELLED, set text "Photo canceled" in the status
 		// Otherwise, set text "Not sure what happened!" with the resultCode
-		
-		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
-			
+
+		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+
 			TextView tv = (TextView) findViewById(R.id.status);
-			
-			if (resultCode == RESULT_OK){
-				tv.setText("Photo OK!");
-				
+
+			if (resultCode == RESULT_OK) {
+				tv.setText(data.getExtras().getSerializable(("random"))
+						.toString());
+
 				ImageButton button = (ImageButton) findViewById(R.id.TakeAPhoto);
-				button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
-			}
-			else if (resultCode == RESULT_CANCELED) {
+				button.setImageDrawable(Drawable.createFromPath(imageFileUri
+						.getPath()));
+			} else if (resultCode == RESULT_CANCELED) {
 				tv.setText("Photo Canceled!");
-			}
-			else {
+			} else {
 				tv.setText("Have no idea what happened!");
 			}
 		}
-		
+
 	}
 }

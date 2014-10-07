@@ -169,8 +169,8 @@ public class BogoPicGenActivity extends Activity {
 				// If accepted save the picture
 				File intentPicture = getPicturePath(intent);
 				saveBMP(intentPicture, ourBMP);
-				File intentText = getTextPath(intent);
-				saveString(intentText, randomString);
+				
+				intent.putExtra("random",randomString);
 				// TODO: set result to RESULT_OK
 				setResult(RESULT_OK);
 
@@ -191,12 +191,6 @@ public class BogoPicGenActivity extends Activity {
 		finish();
 	}
 
-	private void saveString(File intentText, String randomString)
-			throws IOException, FileNotFoundException {
-		OutputStream out = new FileOutputStream(intentText);
-		out.close();
-	}
-
 	private void saveBMP(File intentPicture, Bitmap ourBMP) throws IOException,
 			FileNotFoundException {
 		OutputStream out = new FileOutputStream(intentPicture);
@@ -206,12 +200,6 @@ public class BogoPicGenActivity extends Activity {
 
 	private File getPicturePath(Intent intent) {
 		Uri uri = (Uri) intent.getExtras().get(MediaStore.EXTRA_OUTPUT);
-		return new File(uri.getPath());
-	}
-
-	private File getTextPath(Intent intent) {
-		Uri uri = Uri.parse(randomString);
-		intent.setData(uri);
 		return new File(uri.getPath());
 	}
 }
