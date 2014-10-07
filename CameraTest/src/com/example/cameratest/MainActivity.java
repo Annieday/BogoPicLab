@@ -65,10 +65,6 @@ public class MainActivity extends Activity {
 				+ String.valueOf(System.currentTimeMillis()) + ".jpg";
 		File imageFile = new File(imageFilePath);
 		imageFileUri = Uri.fromFile(imageFile);
-
-		// Create an URI for the random string file
-		String textFilePath = folder + "/"
-				+ String.valueOf(System.currentTimeMillis()) + ".txt";
 		// TODO: Put in the intent in the tag MediaStore.EXTRA_OUTPUT the URI
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
 		// TODO: Start the activity (expecting a result), with the code
@@ -92,8 +88,10 @@ public class MainActivity extends Activity {
 			TextView tv = (TextView) findViewById(R.id.status);
 
 			if (resultCode == RESULT_OK) {
-				tv.setText(data.getExtras().getSerializable(("random"))
-						.toString());
+				tv.setText("Photo OK!");
+				//String random = (String) data.getExtras().getSerializable("random");
+				//tv.setText(data.getExtras().getSerializable(("random"))
+				//		.toString());
 
 				ImageButton button = (ImageButton) findViewById(R.id.TakeAPhoto);
 				button.setImageDrawable(Drawable.createFromPath(imageFileUri
